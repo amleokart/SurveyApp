@@ -7,12 +7,19 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using SurveyApp.Database.DataAccess;
 
 namespace SurveyApp.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly SurveyAppContext _db;
+
+        public AuthController(SurveyAppContext db)
+        {
+            _db = db;
+        }
+
         [HttpGet("login")]
         public IActionResult Login(string returnUrl)
         {
