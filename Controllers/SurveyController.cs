@@ -45,6 +45,8 @@ namespace SurveyApp.Controllers
             return RedirectToAction("Details", "Survey", new { sur.Id });
         }
 
-
+        public IActionResult Details(int surveyId) {
+            return View();
+        }
     }
 }
