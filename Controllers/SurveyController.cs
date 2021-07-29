@@ -32,6 +32,7 @@ namespace SurveyApp.Controllers
             return View();
         }
 
+<<<<<<< HEAD
 
         [HttpPost]
         public IActionResult Insert(string surveyName, string surveyDesc)
@@ -74,6 +75,10 @@ namespace SurveyApp.Controllers
                 return RedirectToAction("details", "survey", new { Id = s.Id });
             }
             return View(s);
+=======
+        public IActionResult Details(int surveyId) {
+            return View();
+>>>>>>> 110bbad (beginning of details/edit page dev)
         }
     }
 }

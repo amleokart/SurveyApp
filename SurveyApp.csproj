@@ -12,7 +12,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+=======
+>>>>>>> 110bbad (beginning of details/edit page dev)
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
@@ -27,8 +30,11 @@
     <None Remove="Views\Example\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Views\Survey\" />
+<<<<<<< HEAD
     <None Remove="Views\Question\" />
     <None Remove="Models\Question\" />
+=======
+>>>>>>> 110bbad (beginning of details/edit page dev)
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Database\DataAccess\" />
@@ -36,7 +42,10 @@
     <Folder Include="Views\Auth\" />
     <Folder Include="Views\Example\" />
     <Folder Include="Views\Survey\" />
+<<<<<<< HEAD
     <Folder Include="Views\Question\" />
     <Folder Include="Models\Question\" />
+=======
+>>>>>>> 110bbad (beginning of details/edit page dev)
   </ItemGroup>
 </Project>
