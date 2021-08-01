@@ -52,7 +52,7 @@ namespace SurveyApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return Redirect("/");
+            return Redirect("/_Layout");
         }
 
         [HttpGet("denied")]

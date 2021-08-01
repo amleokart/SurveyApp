@@ -25,9 +25,7 @@
     <None Remove="Views\Example\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\" />
     <Folder Include="Database\DataAccess\" />
-    <Folder Include="Database\Migrations\" />
     <Folder Include="Database\Models\" />
     <Folder Include="Views\Auth\" />
     <Folder Include="Views\Example\" />

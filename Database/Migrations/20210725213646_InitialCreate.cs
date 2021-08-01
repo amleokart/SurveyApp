@@ -23,6 +23,7 @@ namespace SurveyApp.Database.Migrations
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
+
             migrationBuilder.CreateTable(
                 name: "Surveys",
                 columns: table => new

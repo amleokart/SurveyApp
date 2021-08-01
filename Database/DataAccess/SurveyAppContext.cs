@@ -31,5 +31,6 @@ namespace SurveyApp.Database.DataAccess
         public DbSet<Result> Results { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<User> Users { get; set; }
+
     }
 }
