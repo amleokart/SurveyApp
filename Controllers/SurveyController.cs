@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SurveyApp.Database.DataAccess;
 using SurveyApp.Database.Models;
 
@@ -31,6 +32,7 @@ namespace SurveyApp.Controllers
             return View();
         }
 
+
         [HttpPost]
         public IActionResult Insert(string surveyName, string surveyDesc)
         {
@@ -45,8 +47,11 @@ namespace SurveyApp.Controllers
             return RedirectToAction("Details", "Survey", new { sur.Id });
         }
 
-        public IActionResult Details(int surveyId) {
-            return View();
+        public IActionResult Details(int id)
+        {
+            var survey = _db.Surveys.Include(s => s.Questions).ThenInclude(q => q.Options).FirstOrDefault(s => s.Id == id);
+            if (survey == null) return NotFound("Couldnt find survey with id " + id);
+            else return View(survey);
         }
     }
 }
