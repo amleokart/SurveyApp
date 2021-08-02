@@ -33,6 +33,7 @@ namespace SurveyApp.Controllers
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         [HttpPost]
         public IActionResult Insert(string surveyName, string surveyDesc)
@@ -79,6 +80,15 @@ namespace SurveyApp.Controllers
         public IActionResult Details(int surveyId) {
             return View();
 >>>>>>> 110bbad (beginning of details/edit page dev)
+=======
+        public IActionResult Details(int id)
+        {
+            var survey = _db.Surveys.Include(s => s.Questions).ThenInclude(q => q.Options).FirstOrDefault(s => s.Id == id);
+            if (survey == null) return NotFound("Couldnt find survey with id "+ id);
+            else
+                //return View(survey);
+                return View(survey);
+>>>>>>> ee1c6c7 (displaying the data from db)
         }
     }
 }
