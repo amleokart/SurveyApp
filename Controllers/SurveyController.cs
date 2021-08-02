@@ -34,7 +34,6 @@ namespace SurveyApp.Controllers
         [HttpPost]
         public IActionResult Insert(string surveyName, string surveyDesc)
         {
-            //var sur = new SurveyApp.Database.Models.Survey();
             var sur = new Survey();
             sur.Name = surveyName;
             sur.Description = surveyDesc;
