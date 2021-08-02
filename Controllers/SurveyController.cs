@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SurveyApp.Database.DataAccess;
+using SurveyApp.Database.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,7 +34,8 @@ namespace SurveyApp.Controllers
         [HttpPost]
         public IActionResult Insert(string surveyName, string surveyDesc)
         {
-            var sur = new SurveyApp.Database.Models.Survey();
+            //var sur = new SurveyApp.Database.Models.Survey();
+            var sur = new Survey();
             sur.Name = surveyName;
             sur.Description = surveyDesc;
             sur.UserId = 1;
@@ -41,9 +43,7 @@ namespace SurveyApp.Controllers
 
             _db.SaveChanges();
 
-            var createdSurvey = _db.Surveys.Where(s => s.Name == surveyName).First();
-
-            return RedirectToAction("Details", "Survey", new { id = createdSurvey.Id });
+            return RedirectToAction("Details", "Survey", new { sur.Id });
         }
 
 
