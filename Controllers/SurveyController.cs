@@ -21,12 +21,31 @@ namespace SurveyApp.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            var surveys = _db.Surveys.ToList();
+            return View(surveys);
         }
 
         public IActionResult Create()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Insert(string surveyName, string surveyDesc)
+        {
+            var sur = new SurveyApp.Database.Models.Survey();
+            sur.Name = surveyName;
+            sur.Description = surveyDesc;
+            sur.UserId = 1;
+            _db.Surveys.Add(sur);
+
+            _db.SaveChanges();
+
+            var createdSurvey = _db.Surveys.Where(s => s.Name == surveyName).First();
+
+            return RedirectToAction("Details", "Survey", new { id = createdSurvey.Id });
+        }
+
+
     }
 }
