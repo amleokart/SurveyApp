@@ -40,7 +40,7 @@ namespace SurveyApp.Controllers
             if (question == null) return NotFound("Not found");
             _db.Questions.Remove(question);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("details","survey",new {Id=question.SurveyId});
         }
     }
 }
