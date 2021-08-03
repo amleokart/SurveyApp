@@ -26,7 +26,7 @@ namespace SurveyApp.Controllers
 
         public IActionResult Delete(int? Id)
         {
-            //if (questionId == null || questionId == 0) return NotFound("Not found ID ID");
+            if (questionId == null || questionId == 0) return NotFound("Not found ID ID");
             var question = _db.Questions.Find(Id);
             if (question == null) return NotFound("Not found");
             return View(question);
