@@ -27,6 +27,7 @@
     <None Remove="Views\Example\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Views\Survey\" />
+    <None Remove="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Database\DataAccess\" />
@@ -34,5 +35,6 @@
     <Folder Include="Views\Auth\" />
     <Folder Include="Views\Example\" />
     <Folder Include="Views\Survey\" />
+    <Folder Include="Views\Question\" />
   </ItemGroup>
 </Project>

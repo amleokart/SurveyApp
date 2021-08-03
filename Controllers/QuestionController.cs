@@ -23,5 +23,24 @@ namespace SurveyApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Delete(int? Id)
+        {
+            //if (questionId == null || questionId == 0) return NotFound("Not found ID ID");
+            var question = _db.Questions.Find(Id);
+            if (question == null) return NotFound("Not found");
+            return View(question);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? Id)
+        {
+            var question = _db.Questions.Find(Id);
+            if (question == null) return NotFound("Not found");
+            _db.Questions.Remove(question);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
