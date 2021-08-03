@@ -12,15 +12,16 @@
 <body>
     <div>
         <h1>Details for @survey.Name </h1>
-        <h3>Questions: </h3>
+        <h2>Description: </h2>
+        <h3>Questions <a class="btn" style="background-color: #4aff4a ">Add a new question  <i class="glyphicon glyphicon-plus"></i> </a></h3>
         <ul class="list-group">
             @foreach (var question in survey.Questions)
             {
-                <li class="list-group-item active" style="color:black;margin:5px;width:fit-content">
+                <li class="list-group-item active" style="color: black; margin: 5px; width: fit-content; background-color: #47b6ff ">
                     <ul class="list-inline m-0">
-                        <input type="text" value="@question.Content" readonly>
+                        <a>@question.Content</a>
                         <li class="list-inline-item" style="padding:5px">
-                            <a class="btn" style="background-color:greenyellow"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn" style="background-color: #00ffff "><i class="glyphicon glyphicon-edit"></i></a>
                         </li>
                         <li class="list-inline-item">
                             <a asp-controller="question" asp-action="delete" asp-route-Id="@question.Id" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
