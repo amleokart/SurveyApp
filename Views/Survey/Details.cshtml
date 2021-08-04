@@ -11,9 +11,14 @@
 </head>
 <body>
     <div>
-        <h1>Survey @survey.Name <a class="btn" style="background-color: #c8eff4 ">Edit survey details  <i class="glyphicon glyphicon-edit"></i> </a></h1>
+        <h1 style="background-color:#f27d42;padding:10px;border-radius:5px">
+            Survey @survey.Name
+            <a asp-controller="survey" asp-action="edit" asp-route-Id="@survey.Id" class="btn" style="background-color: #c8eff4 ">
+                Edit survey details  <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </h1>
         <h2>Description: </h2>
-        <h3 style="background-color:#96FFFF;padding:10px">Questions <a class="btn" style="background-color: #55bdca ">Add a new question  <i class="glyphicon glyphicon-plus"></i> </a> </h3>
+        <h3 style="background-color:#96FFFF;padding:10px;border-radius:5px">Questions<a class="btn" style="background-color: #55bdca;margin-left:10px">Add a new question<i class="glyphicon glyphicon-plus" style="padding-left:5px"></i> </a> </h3>
         <ul class="list-group">
             @foreach (var question in survey.Questions)
             {
