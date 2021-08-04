@@ -86,9 +86,30 @@ namespace SurveyApp.Controllers
             var survey = _db.Surveys.Include(s => s.Questions).ThenInclude(q => q.Options).FirstOrDefault(s => s.Id == id);
             if (survey == null) return NotFound("Couldnt find survey with id "+ id);
             else
-                //return View(survey);
                 return View(survey);
 >>>>>>> ee1c6c7 (displaying the data from db)
+        }
+
+        public IActionResult Edit(int? Id)
+        {
+            if (Id == null || Id == 0) return NotFound("Not found");
+            var survey = _db.Surveys.Find(Id);
+            if (survey == null) return NotFound("Not found");
+            return View(survey);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Survey s) {
+            if (ModelState.IsValid){
+                Survey survey = _db.Surveys.FirstOrDefault(t => t.Id == s.Id);
+                survey.Name = s.Name;
+                survey.Status = s.Status;
+                survey.LastModified = DateTimeOffset.Now;
+                _db.SaveChanges();
+                return RedirectToAction("details", "survey", new { Id = s.Id });
+            }
+            return View(s);
         }
     }
 }
