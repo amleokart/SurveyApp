@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using SurveyApp.Database.DataAccess;
+using SurveyApp.Database.Models;
 
 namespace SurveyApp.Controllers
 {
@@ -24,22 +23,21 @@ namespace SurveyApp.Controllers
             return View();
         }
 
-        [HttpGet("denied")]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult Register(string username, string email, string password)
+        public IActionResult Register(RegistrationViewModel viewModel)
         {
             var user = new SurveyApp.Database.Models.User();
-            user.Username = username;
-            user.Email = email;
-            user.EncryptedPassword = password;
+            if (_db.Users.Any(x => x.Username == user.Username))
+            {
+                ViewBag.DuplicateMessage = "Username already exist.";
+                //return View("Register", "user");
+                return View(new RegistrationViewModel());
+            }
             _db.Users.Add(user);
             _db.SaveChanges();
-            return View();
+            ModelState.Clear();
+            ViewBag.SuccessMessage = "Registration successful";
+            return RedirectToAction("Login", "Auth");
         }
 
         public IActionResult Registration()
@@ -47,4 +45,6 @@ namespace SurveyApp.Controllers
             return View();
         }
     }
+
+  
 }

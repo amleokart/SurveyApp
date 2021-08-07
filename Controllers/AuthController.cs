@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SurveyApp.Database.DataAccess;
+using System.Data.SqlClient;
+using System.Data;
+using SurveyApp.Database.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace SurveyApp.Controllers
 {
@@ -20,6 +24,14 @@ namespace SurveyApp.Controllers
             _db = db;
         }
 
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        
+
         [HttpGet("login")]
         public IActionResult Login(string returnUrl)
         {
@@ -28,10 +40,13 @@ namespace SurveyApp.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Validate(string email, string password, string returnUrl)
-        {
+        public async Task<IActionResult> Validate(String email, String password, String returnUrl) {
+
             ViewData["ReturnUrl"] = returnUrl;
-            if (email == "email" && password == "password")
+
+            var user = new SurveyApp.Database.Models.User();
+            if(_db.Users.Any(x => x.Email == user.Email) && _db.Users.Any(x => x.EncryptedPassword == user.EncryptedPassword))
+            //if (email == "email" && password == "password")
             {
                 var claims = new List<Claim>
                 {
@@ -41,7 +56,15 @@ namespace SurveyApp.Controllers
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
-                return Redirect(returnUrl);
+
+
+            if (string.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect("/");
+                } else
+                {
+                    return Redirect(returnUrl);
+                }
             }
             TempData["Error"] = "Username or password is invalid";
             return View("login");
@@ -52,7 +75,7 @@ namespace SurveyApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return Redirect("/_Layout");
+            return Redirect("/");
         }
 
         [HttpGet("denied")]

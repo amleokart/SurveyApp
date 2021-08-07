@@ -1,4 +1,5 @@
-﻿@*
+﻿@model SurveyApp.Database.Models.RegistrationViewModel
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -6,6 +7,7 @@
     var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
+
 <h1>Registration</h1>
 @if (!string.IsNullOrEmpty(error))
 {
@@ -14,17 +16,17 @@
 <form asp-action="Register" method="post">
 
     <div class="container" style="padding: 16px;">
-        <label for="email"><b> Username: </b></label>
-        <input type="text" placeholder="Enter e-mail" name="email" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
+        <label for="username"><b> Username: </b></label>
+        <input type="text" placeholder="Enter username" asp-for="@Model.Username" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
 
         <label for="email"><b> E-mail: </b></label>
-        <input type="text" placeholder="Enter e-mail" name="email" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
+        <input type="text" placeholder="Enter e-mail" asp-for="@Model.Email" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
 
         <label for="psw"><b> Password: </b></label>
-        <input type="password" placeholder="Enter password" name="password" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
+        <input type="password" placeholder="Enter password" asp-for="@Model.Password" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
 
         <label for="psw"><b> Password repeat: </b></label>
-        <input type="password" placeholder="Enter password" name="password" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
+        <input type="password" placeholder="Enter password" asp-for="@Model.ConfirmPassword" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
 
         <button type="submit" style="background-color: #04AA6D; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;"> Register me </button>
     </div>
