@@ -10,10 +10,6 @@ namespace SurveyApp.Database.DataAccess
         {
         }
 
-        public SurveyAppContext()
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AnswerOption>()

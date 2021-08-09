@@ -13,7 +13,7 @@ namespace SurveyApp.Controllers
     public class ResultController : Controller
     {
         private readonly SurveyAppContext _db;
-        private object resultId;
+     
 
         public ResultController(SurveyAppContext db)
         {
@@ -25,30 +25,38 @@ namespace SurveyApp.Controllers
         {
             return View();
         }
-        [HttpGet ("create")]
+        [HttpGet]
         public IActionResult Create(string code)
         {
-            var survey = _db.Surveys.Where(s => s.Code == code);
-            return View(survey);
+            var survey = _db.Surveys.FirstOrDefault(s => s.Code.Equals(code));
+            if (survey == null)
+            {
+                return NotFound("Couldn't find survey with code " + code);
+            }
+            else
+            {
+                return View(survey);
+            }
+                
         }
 
-        [HttpPost("insert")]
+        [HttpPost]
         public IActionResult Insert(int surveyId)
         {
-            using(var context = new SurveyAppContext())
-            {
+        
                 var res = new Result()
                 {
-                    Id=1,
-                    Completed=true,
+                    SurveyId=surveyId,
+                    Completed=false,
+                    CreatedAt=DateTimeOffset.Now
 
                 };
-                context.Results.Add(res);
-                context.SaveChanges();
-            }
+                _db.Results.Add(res);
+                _db.SaveChanges();
+            
             
 
-            return RedirectToAction("Edit", new { id = resultId }) ;
+            return RedirectToAction("Edit", new { id = res.Id }) ;
         }
     }
 }
