@@ -68,7 +68,7 @@ namespace SurveyApp.Controllers
             if (ModelState.IsValid){
                 Survey survey = _db.Surveys.FirstOrDefault(t => t.Id == s.Id);
                 survey.Name = s.Name;
-                survey.Status = s.Status;
+                survey.Description = s.Description;
                 survey.LastModified = DateTimeOffset.Now;
                 _db.SaveChanges();
                 return RedirectToAction("details", "survey", new { Id = s.Id });

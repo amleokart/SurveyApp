@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SurveyApp.Database.DataAccess;
+using SurveyApp.Database.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,7 +41,24 @@ namespace SurveyApp.Controllers
             if (question == null) return NotFound("Not found");
             _db.Questions.Remove(question);
             _db.SaveChanges();
-            return RedirectToAction("details","survey",new {Id=question.SurveyId});
+            return RedirectToAction("details", "survey", new { Id = question.SurveyId });
+        }
+
+        public IActionResult Create(int Id)
+        {
+            ViewBag.SurveyId = Id;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("Content,AllowOther,Type,CreatedAt,LastModified,SurveyId")] Question question)
+        {
+            question.CreatedAt = DateTimeOffset.Now;
+            question.LastModified = DateTimeOffset.Now;
+            _db.Questions.Add(question);
+            _db.SaveChanges();
+            return RedirectToAction("details", "survey", new { Id = question.SurveyId });
         }
     }
 }

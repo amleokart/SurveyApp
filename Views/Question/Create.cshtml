@@ -1,0 +1,83 @@
+﻿@model SurveyApp.Database.Models.Question;
+
+@{
+    SurveyApp.Database.Models.Question question = ViewData.Model;
+    int surveyId = ViewBag.SurveyId;
+}
+<html>
+<script type="text/javascript">
+
+    function showOptions() {
+        var select = document.getElementById('Type')
+        if (select.value === 2 || select.value === 3) document.getElementById("listOfOptions").style.visibility = 'hidden';
+}
+    </script>
+<body>
+    <form method="post" asp-action="Create">
+        <input asp-for="SurveyId" value="@surveyId" hidden />
+        <div class="border p-3">
+            <div class="form-group row">
+                <h2 class="text-black-50 pl-3">Add a question</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label asp-for="Content">Question content</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <input asp-for="Content" class="form-control" style="text-align:center" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label asp-for="Type">Choose a type of answer</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <select class="form-control" id="Type" name="Type" onclick="showOptions()">
+                                <option value="0">Single select</option>
+                                <option value="1">Multi select</option>
+                                <option value="2">Yes/no question</option>
+                                <option value="3">Text answer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="listOfOptions">
+                        <ul class="list-group">
+                            <li class="list-group-item active" style="color: black; margin: 5px; width: fit-content; background-color: #96ffff; border: solid #f27d42 1px ">
+                                <ul class="list-inline m-0">
+                                    <a>test</a>
+                                    <li class="list-inline-item" style="padding:5px">
+                                        <a class="btn" style="background-color: #c8eff4;border:0.5px solid black"><i class="glyphicon glyphicon-edit"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a class="btn" style="background-color:#f27d42"><i class="glyphicon glyphicon-trash"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-8 offset-2 row">
+                            <div class="col">
+                                <input type="submit" class="btn w-75" style="background-color: #f27d42" value="Add this question" />
+                            </div>
+                            <div class="col">
+                                <a asp-controller="Survey" asp-action="Details" asp-route-Id="@surveyId" class="btn w-75" style="background-color:#96FFFF">Back</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
