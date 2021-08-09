@@ -26,6 +26,11 @@ namespace SurveyApp.Database.Models
         public DateTimeOffset LastModified { get; set; }
 
         public virtual ICollection<Survey> Surveys { get; set; }
+
+        public static implicit operator bool(User v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class RegistrationViewModel

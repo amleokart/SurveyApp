@@ -43,15 +43,13 @@ namespace SurveyApp.Controllers
         public async Task<IActionResult> Validate(String email, String password, String returnUrl) {
 
             ViewData["ReturnUrl"] = returnUrl;
-
-            var user = new SurveyApp.Database.Models.User();
-            if(_db.Users.Any(x => x.Email == user.Email) && _db.Users.Any(x => x.EncryptedPassword == user.EncryptedPassword))
-            //if (email == "email" && password == "password")
+            var user = _db.Users.FirstOrDefault(x => x.Email == email.ToLower() && x.EncryptedPassword == password);
+            if (user != null)
             {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, email),
-                    new Claim(ClaimTypes.NameIdentifier, email)
+                    new Claim(ClaimTypes.NameIdentifier, user.Username)
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
