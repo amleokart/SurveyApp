@@ -26,24 +26,25 @@ namespace SurveyApp.Controllers
         [HttpPost]
         public IActionResult Register(RegistrationViewModel viewModel)
         {
-            var user = _db.Users.FirstOrDefault(x => x.Username == viewModel.Username || x.Email == viewModel.Email);
+            var user = _db.Users.FirstOrDefault(x => x.Username == viewModel.Username || x.Email == viewModel.Email || x.EncryptedPassword == viewModel.Password);
             if (user != null)
             {
-                ViewBag.DuplicateMessage = "Username already exist.";
+                ViewBag.DuplicateMessage = "Username already exist";
                 return View("Registration");
-            }
+            } 
             else if (!viewModel.Password.Equals(viewModel.ConfirmPassword))
             {
-                ViewBag.DuplicateMessage = "Password do not match.";
+                ViewBag.DuplicateMessage = "Password do not match";
                 return View("Registration");
             }
             else
             {
-
                 user = new User()
                 {
                     Username = viewModel.Username,
                     Email = viewModel.Email.ToLower(),
+                    EncryptedPassword = viewModel.Password,
+                    CreatedAt = DateTimeOffset.Now
                 };
                 _db.Users.Add(user);
                 _db.SaveChanges();
