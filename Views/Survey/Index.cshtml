@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+@model IEnumerable<SurveyApp.Database.Models.Survey>
+
+<h1>Index Survey probni ispis</h1>
+@if (Model.Count() > 0)
+{   
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Survey Name</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    @foreach (var survey in Model)
+    {
+        <tbody>
+            <tr>
+                
+                <td>@survey.Name</td>
+                <td>
+                    <a asp-controller="Survey" asp-action="Edit" asp-route-id="@survey.Id">Edit</a>
+                </td>
+                <td>
+                    <a asp-controller="Survey" asp-action="Publish" asp-route-id="@survey.Id">Publish</a>
+                            </td>
+                <td>
+                    <a asp-controller="Survey" asp-action="Close" asp-route-id="@survey.Id">Close</a>
+                </td>
+                <td>
+                    <a asp-controller="Survey" asp-action="Share" asp-route-id="@survey.Id">Share</a>
+                </td>
+                <td>
+                    <a asp-controller="Survey" asp-action="Results" asp-route-id="@survey.Id">Results</a>
+                </td>
+            </tr>
+
+        </tbody>
+
+    }
+</table>
+}
+else
+{
+    <p>There is nothing in the database!</p>
+}
+
+

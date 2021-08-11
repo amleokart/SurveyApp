@@ -6,13 +6,24 @@
     var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
+
 <h1>Login</h1>
 @if (!string.IsNullOrEmpty(error))
 {
     <h2 class="alert-danger">@error</h2>
 }
 <form action="/login?ReturnUrl=@System.Web.HttpUtility.UrlEncode(returnUrl)" method="post">
-    <input type="text" name="email" placeholder="Email" />
-    <input type="password" name="password" placeholder="Password" />
-    <input type="submit" value="Login" />
+
+    <div class="container" style="padding: 16px;">
+        <label for="email"><b>E-mail: </b></label>
+        <input type="text" placeholder="Enter e-mail" name="email" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
+
+        <label for="psw"><b>Password: </b></label>
+        <input type="password" placeholder="Enter password" name="password" required style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;">
+
+        <button type="submit" style="background-color: #04AA6D; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Login</button>
+        <label style="margin-top: 2%;">
+            Don't have an account? <a href="/Registration">Register me!</a>
+        </label>
+    </div>
 </form>
