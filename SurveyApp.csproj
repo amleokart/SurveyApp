@@ -28,6 +28,7 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Views\Survey\" />
     <None Remove="Views\Question\" />
+    <None Remove="Views\Option\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Database\" />
@@ -38,5 +39,6 @@
     <Folder Include="Views\Example\" />
     <Folder Include="Views\Survey\" />
     <Folder Include="Views\Question\" />
+    <Folder Include="Views\Option\" />
   </ItemGroup>
 </Project>

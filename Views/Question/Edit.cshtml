@@ -1,0 +1,110 @@
+﻿@model SurveyApp.Database.Models.Question;
+
+@{
+    ViewData["Title"] = "Edit question";
+    var question = ViewData.Model;
+}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript">$(document).ready(function () {
+            $('#typeSelect').change(function () {
+                if (this.value == 2 || this.value == 3) $('#typeChoice').hide();
+                else $('#typeChoice').show();
+            }).change()
+        });</script>
+</head>
+<html>
+<body>
+    <form method="post" asp-action="Edit">
+        <input asp-for="SurveyId" value="@question.SurveyId" hidden />
+        <div class="border p-3">
+            <div class="form-group row">
+                <h2 class="text-black-50 pl-3" style="margin-left:10px">Add a question</h2>
+            </div>
+            <div class="row" style="margin-left:10px;margin-right:10px">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label asp-for="Content">Question title</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <input asp-for="Content" style="border-color: #f27d42" class="form-control" style="text-align:center" />
+                        </div>
+                        <div class="col-2" style="align-content: center;height:inherit">
+                            <label style="margin-top:5px">
+                                Allow other answer
+                                <input asp-for="AllowOther" type="checkbox" data-toggle="toggle">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label asp-for="Type">Choose a type</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <select class="form-control" id="typeSelect" name="Type" style="border-color: #f27d42" asp-for="Type">
+                                <option value="0">Single select</option>
+                                <option value="1">Multi select</option>
+                                <option value="2">Yes/no question</option>
+                                <option value="3">Text answer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="typeChoice">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <label asp-for="Options">
+                                    Add options and check the one/ones that are correct<a asp-controller="Option" asp-action="Create" asp-route-Id="@question.Id" class="btn" style="background-color: #f27d42; margin-left: 10px; ">
+                                        Add an option<i class="glyphicon glyphicon-plus" style="padding-left:5px"></i>
+                                    </a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="overflow-y: scroll; height: 250px;" id="typeChoice">
+                            <ul class="col-12">
+                                <li class="list-group-item active" style="padding:0px">
+                                    <ul class="list-group" style="margin:0px">
+                                        @foreach (var option in question.Options)
+                                        {
+                                            <li class="list-group-item active" style="border: 2px solid #f27d42"> 
+                                                <ul class="list-inline m-1">
+                                                    <a>@option.Content</a>
+                                                    <li class="list-inline-item">
+                                                        <a asp-controller="option" asp-action="edit" asp-route-Id="@option.Id" class="btn" style="background-color: #c8eff4;border:0.5px solid black"><i class="glyphicon glyphicon-edit"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a asp-controller="option" asp-action="delete" asp-route-Id="@option.Id" class="btn" style="background-color:#f27d42"><i class="glyphicon glyphicon-trash"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-8 offset-2 row">
+                            <div class="col">
+                                <input type="submit" class="btn w-75" style="background-color: #f27d42" value="Update" />
+                            </div>
+                            <div class="col">
+                                <a asp-controller="Survey" asp-action="Details" asp-route-Id="@Model.SurveyId" class="btn w-75" style="background-color:#96FFFF">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
