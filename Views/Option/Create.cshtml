@@ -1,0 +1,40 @@
+﻿@model SurveyApp.Database.Models.Option;
+@{
+    ViewData["Title"] = "Create option";
+    var option = ViewData.Model;
+    int questionId = ViewBag.QuestionId;
+    int surveyId = ViewBag.SurveyId;
+ }
+<form method="post" asp-action="create">
+    <input asp-for="QuestionId" value="@questionId" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Add option</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label asp-for="Content"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12" >
+                        <input asp-for="Content" class="form-control" style="text-align:center" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn w-100" style="background-color: #f27d42;" value="Add this option" />
+                        </div>
+                        <div class="col">
+                            <a asp-controller="Question" asp-action="Edit" asp-route-Id="@questionId" class="btn w-100" style="background-color:#96FFFF">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
