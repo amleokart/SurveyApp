@@ -1,0 +1,13 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Survey name";
+}
+@Model.Name
+@Model.Description
+<form asp-action="Insert" asp-controller="Result">
+           <input name="surveyId" value=@Model.Id type="hidden" />
+            <button type="submit" >Start survey</button>/>   
+    </form>
+

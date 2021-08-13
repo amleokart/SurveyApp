@@ -1,0 +1,46 @@
+@model SurveyApp.Database.Models.Survey;
+@{
+    ViewData["Title"] = "Survey details";
+    var survey = ViewData.Model;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div>
+        <h1 style="background-color:#f27d42;padding:10px;border-radius:5px">
+            Survey @survey.Name
+            <a asp-controller="survey" asp-action="edit" asp-route-Id="@survey.Id" class="btn" style="background-color: #c8eff4; border: 0.5px solid black ">
+                Edit survey details  <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </h1>
+        <h2 style="background-color: #c8eff4; padding: 10px; border-radius: 5px; border: solid #f27d42 1px ">
+            Description:
+            <br />
+            <a style="font-size:20px">@survey.Description</a>
+        </h2>
+        <h3 style="background-color: #337ab7; padding: 10px; border-radius: 5px; border: solid #f27d42 1px ">Questions<a asp-controller="question" asp-action="create" asp-route-Id="@survey.Id" class="btn" style="background-color: #f27d42; margin-left: 10px; ">Add a new question<i class="glyphicon glyphicon-plus" style="padding-left:5px"></i> </a></h3>
+        <div style="overflow-y: scroll; height:400px;padding-left:20px">
+            <ul class="list-group">
+                @foreach (var question in survey.Questions)
+                {
+                    <li class="list-group-item active" style="color: black; margin: 5px;width:fit-content; border: solid #f27d42 1px ">
+                        <ul class="list-inline m-0">
+                            <a>@question.Content</a>
+                            <li class="list-inline-item" style="padding:5px">
+                                <a asp-controller="question" asp-action="edit" asp-route-Id="@question.Id" class="btn" style="background-color: #c8eff4;border:0.5px solid black"><i class="glyphicon glyphicon-edit"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a asp-controller="question" asp-action="delete" asp-route-Id="@question.Id" class="btn" style="background-color:#f27d42"><i class="glyphicon glyphicon-trash"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

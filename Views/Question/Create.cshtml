@@ -1,0 +1,81 @@
+﻿@model SurveyApp.Database.Models.Question;
+
+@{
+    ViewData["Title"] = "Create question";
+    SurveyApp.Database.Models.Question question = ViewData.Model;
+    int surveyId = ViewBag.SurveyId;
+}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script type="text/javascript">$(document).ready(function () {
+            $('#typeSelect').change(function () {
+                if (this.value == 2 || this.value == 3) $('#typeChoice').hide();
+                else $('#typeChoice').show();
+            }).change()
+        });</script>
+</head>
+<html>
+<body>
+    <form method="post" asp-action="Create">
+        <input asp-for="SurveyId" value="@surveyId" hidden />
+        <div class="border p-3">
+            <div class="form-group row">
+                <h2 class="text-black-50 pl-3" style="margin-left:10px">Add a question</h2>
+            </div>
+            <div class="row" style="margin-left:10px;margin-right:10px">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label asp-for="Content">Question title</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <input asp-for="Content" style="border-color: #f27d42" class="form-control" style="text-align:center" />
+                        </div>
+                        <div class="col-2" style="align-content: center;height:inherit">
+                            <label style="margin-top:5px">
+                                Allow other answer 
+                                <input asp-for="AllowOther" type="checkbox" data-toggle="toggle">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label asp-for="Type">Choose a type</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <select class="form-control" id="typeSelect" name="Type" style="border-color: #f27d42">
+                                <option value="0">Single select</option>
+                                <option value="1">Multi select</option>
+                                <option value="2">Yes/no question</option>
+                                <option value="3">Text answer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="justify-content:center">
+                        <div class="col-8 row" >
+                            <div class="col" style="align-content: center">
+                                <input type="submit" class="btn w-100" style="background-color: #f27d42;" value="Add this question" />
+                            </div>
+                            <div class="col" style="align-content: center">
+                                <a asp-controller="Survey" asp-action="Details" asp-route-Id="@surveyId" class="btn w-100" style="background-color:#96FFFF; position:center">Back</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+

@@ -1,0 +1,39 @@
+﻿@model SurveyApp.Database.Models.Option;
+
+@{
+    ViewData["Title"] = "Delete option";
+}
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Are you sure you want to delete the option?</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label asp-for="Content">Option title</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <input asp-for="Content" disabled class="form-control" style="text-align:center" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn w-75" style="background-color: #f27d42" value="Delete" />
+                        </div>
+                        <div class="col">
+                            <a asp-controller="question" asp-action="Edit" asp-route-Id="@Model.QuestionId" class="btn w-75" style="background-color: #96FFFF ">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
